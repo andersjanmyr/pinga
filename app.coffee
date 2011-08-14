@@ -5,9 +5,6 @@ require 'sass'
 app = express.createServer()
 
 app.configure -> 
-  app.register '.coffee', require('coffeekup')
-  app.set 'view engine', 'coffee'
-  app.set 'views', __dirname + '/views'
   app.use express.bodyParser()
   app.use express.methodOverride()
   #app.use express.compiler({ src: __dirname + '/public', enable: ['scss'] })
