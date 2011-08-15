@@ -24,6 +24,10 @@ port = process.env.PORT or process.env.VMC_APP_PORT or 4000
 console.log "Starting on port #{port}"
 app.listen(port)
 
+timestamp = ->
+  d = new Date
+  "#{d.getFullYear()}-#{d.getMonth()+1}-#{d.getDate()} #{d.getHours()}:#{d.getMinutes()}:#{d.getSeconds()}"
+
 pingHost = (url) ->
   console.log "Making request to #{url}"
   client = http.createClient 80, url
@@ -31,9 +35,8 @@ pingHost = (url) ->
   req.end()
 
   req.on 'response', (res) ->
-    console.log url, res.statusCode
-    PINGS = [] if PINGS.length > 100
-    PINGS.push "#{url}: #{res.statusCode}"
+    PINGS.pop() while PINGS.length > 100
+    PINGS.unshift "#{url}: #{res.statusCode}, #{timestamp()}"
     console.log PINGS
 
 for url in URLS
