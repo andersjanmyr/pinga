@@ -19,7 +19,7 @@ app.configure ->
 
 
 app.get '/', (request, response) ->
-  response.send PINGS.inspect
+  response.send PINGS
 
 app.listen(process.env.VMC_APP_PORT || 4000)
 
@@ -38,6 +38,6 @@ pingHost = (url) ->
 URLS.forEach (url) ->
   pingUrl = ->
     pingHost url
-  setInterval pingUrl, 6 * 1000
+  setInterval pingUrl, 15 * 60 * 1000
 
 
