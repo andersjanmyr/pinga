@@ -5,7 +5,7 @@ express = require 'express'
 
 app = express.createServer()
 
-URLS = ['equilo.se', 'halsansrum.heroku.com']
+URLS = ['equilo.se', 'halsansrum.herokuapp.com']
 PINGS = []
 
 
