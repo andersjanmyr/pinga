@@ -13,8 +13,8 @@ console.log 'Starting on port 4000'
 app.configure -> 
   app.use express.bodyParser()
   app.use express.methodOverride()
-#  app.use app.router
-#  app.use express.static(__dirname + '/public')
+ app.use app.router
+ app.use express.static(__dirname + '/public')
 
 
 
