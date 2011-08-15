@@ -1,9 +1,9 @@
 {
-  "name":"pingu",
+  "name":"pinga",
   "version":"0.0.1",
   "dependencies":{
     "express":"",
-    "sass":"",
+    "mongodb":"",
     "cron":""
   }
 }

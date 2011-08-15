@@ -41,5 +41,6 @@ for url in URLS
     pingUrl = -> 
       pingHost url
     setInterval pingUrl, 15 * 60 * 1000
+    pingUrl()
 
 
