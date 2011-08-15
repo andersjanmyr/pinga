@@ -8,7 +8,6 @@ app = express.createServer()
 URLS = ['equilo.se', 'halsansrum.heroku.com']
 PINGS = []
 
-console.log 'Starting on port 4000'
 
 app.configure -> 
   app.use express.bodyParser()
@@ -21,7 +20,9 @@ app.configure ->
 app.get '/', (request, response) ->
   response.send PINGS
 
-app.listen(process.env.PORT or process.env.VMC_APP_PORT or 4000)
+port = process.env.PORT or process.env.VMC_APP_PORT or 4000 
+console.log "Starting on port #{port}"
+app.listen(port)
 
 pingHost = (url) ->
   console.log "Making request to #{url}"
