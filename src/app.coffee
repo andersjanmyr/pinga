@@ -36,9 +36,10 @@ pingHost = (url) ->
     PINGS.push "#{url}: #{res.statusCode}"
     console.log PINGS
 
-URLS.forEach (url) ->
-  pingUrl = ->
-    pingHost url
-  setInterval pingUrl, 15 * 60 * 1000
+for url in URLS
+  do (url) ->
+    pingUrl = -> 
+      pingHost url
+    setInterval pingUrl, 15 * 60 * 1000
 
 
