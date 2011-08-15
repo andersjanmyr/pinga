@@ -26,7 +26,9 @@ app.listen(port)
 
 timestamp = ->
   d = new Date
-  "#{d.getFullYear()}-#{d.getMonth()+1}-#{d.getDate()} #{d.getHours()}:#{d.getMinutes()}:#{d.getSeconds()}"
+  date = "#{d.getFullYear()}-#{d.getMonth()+1}-#{d.getDate()}"
+  time = "#{d.getHours()}:#{d.getMinutes()}:#{d.getSeconds()}"
+  "#{date} #{time}"
 
 pingHost = (url) ->
   console.log "Making request to #{url}"
@@ -36,7 +38,7 @@ pingHost = (url) ->
 
   req.on 'response', (res) ->
     PINGS.pop() while PINGS.length > 100
-    PINGS.unshift "#{url}: #{res.statusCode}, #{timestamp()}"
+    PINGS.unshift [url, res.statusCode, timestamp()]
     console.log PINGS
 
 for url in URLS
