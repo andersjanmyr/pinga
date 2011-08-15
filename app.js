@@ -14,7 +14,7 @@
   app.get('/', function(request, response) {
     return response.send(PINGS);
   });
-  app.listen(process.env.VMC_APP_PORT || 4000);
+  app.listen(process.env.PORT || process.env.VMC_APP_PORT || 4000);
   pingHost = function(url) {
     var client, req;
     console.log("Making request to " + url);

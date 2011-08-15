@@ -21,7 +21,7 @@ app.configure ->
 app.get '/', (request, response) ->
   response.send PINGS
 
-app.listen(process.env.VMC_APP_PORT || 4000)
+app.listen(process.env.PORT or process.env.VMC_APP_PORT or 4000)
 
 pingHost = (url) ->
   console.log "Making request to #{url}"
