@@ -69,6 +69,6 @@ for url in URLS
     setInterval pingUrl, 15 * 60 * 1000
     pingUrl()
     console.log(process.env);
-    sendEmail('url', 'status')
+    #sendEmail('url', 'status')
 
 
