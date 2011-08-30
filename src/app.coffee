@@ -43,6 +43,7 @@ pingHost = (url) ->
     PINGS.pop() while PINGS.length > 100
     PINGS.unshift [url, response.statusCode, timestamp()]
     console.log PINGS
+    sendEmail(url, response.statusCode) if response.statusCode isnt 200
 
 nodemailer.SMTP = {
     host: 'smtp.sendgrid.net',  
@@ -50,8 +51,8 @@ nodemailer.SMTP = {
     ssl: false, 
     use_authentication: true,
     domain: process.env['SENDGRID_DOMAIN'],
-    username: process.env['SENDGRID_USERNAME'],
-    password: process.env['SENDGRID_PASSWORD']
+    user: process.env['SENDGRID_USERNAME'],
+    pass: process.env['SENDGRID_PASSWORD']
 }
 sendEmail = (url, status) ->
   nodemailer.send_mail {
