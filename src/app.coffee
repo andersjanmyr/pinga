@@ -48,8 +48,8 @@ nodemailer.SMTP = {
     host: 'smtp.sendgrid.net',  
     port: 25,
     ssl: false, 
+    use_authentication: true,
     domain: process.env['SENDGRID_DOMAIN'],
-    use_authentication: false,
     username: process.env['SENDGRID_USERNAME'],
     password: process.env['SENDGRID_PASSWORD']
 }
