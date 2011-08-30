@@ -73,6 +73,7 @@ for url in URLS
     setInterval pingUrl, 15 * 60 * 1000
     pingUrl()
     console.log(process.env);
-    sendEmail('Ping restarted', '')
+
+sendEmail('Ping restarted', '')
 
 
