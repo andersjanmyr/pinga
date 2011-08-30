@@ -47,26 +47,28 @@ pingHost = (url) ->
 sendEmail = (url, status) ->
   email.send {
       host : 'smtp.sendgrid.net',  
-      port : "25",
+      port : '25',
       ssl: false, 
       domain : process.env['SENDGRID_DOMAIN'],
-      to : "anders@janmyr.com",
-      from : "pinga@janmyr.com",
+      to : 'anders@janmyr.com',
+      from : 'pinga@janmyr.com',
       subject : "#{url} failed",
       body: "#{url} failed with status #{status}",
-      authentication : "plain",
+      authentication : 'plain',
       username : process.env['SENDGRID_USERNAME'],
       password : process.env['SENDGRID_PASSWORD']
     },
     (err, result) -> 
       console.log(err) if err
-    
+
+
 for url in URLS
   do (url) ->
     pingUrl = -> 
       pingHost url
     setInterval pingUrl, 15 * 60 * 1000
     pingUrl()
+    console.log(process.env);
     sendEmail('url', 'status')
 
 
