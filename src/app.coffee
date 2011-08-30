@@ -1,11 +1,17 @@
 require.paths.unshift('./node_modules')
 
-http = require 'http'
+request = require 'request'
 express = require 'express'
 
 app = express.createServer()
 
-URLS = ['equilo.se', 'halsansrum.herokuapp.com', 'hjarups-yoga.herokuapp.com', 'pinga.herokuapp.com']
+URLS = [
+  'http://equilo.se',
+  'http://halsansrum.herokuapp.com',
+  'http://hjarups-yoga.herokuapp.com',
+  'http://pinga.herokuapp.com',
+  'https://agenda-riksdagen.heroku.com/admins/sign_in']
+
 PINGS = []
 
 
@@ -32,13 +38,9 @@ timestamp = ->
 
 pingHost = (url) ->
   console.log "Making request to #{url}"
-  client = http.createClient 80, url
-  req = client.request('GET', '/', { Host: url })
-  req.end()
-
-  req.on 'response', (res) ->
+  request url, (error, response, body) ->
     PINGS.pop() while PINGS.length > 100
-    PINGS.unshift [url, res.statusCode, timestamp()]
+    PINGS.unshift [url, response.statusCode, timestamp()]
     console.log PINGS
 
 for url in URLS
