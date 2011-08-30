@@ -43,7 +43,8 @@ pingHost = (url) ->
     PINGS.pop() while PINGS.length > 100
     PINGS.unshift [url, response.statusCode, timestamp()]
     console.log PINGS
-    sendEmail(url, response.statusCode) if response.statusCode isnt 200
+    if response.statusCode isnt 200
+      sendEmail("#{url} failed", "#{url} failed with status #{response.statusCode}")
 
 nodemailer.SMTP = {
     host: 'smtp.sendgrid.net',  
@@ -54,12 +55,12 @@ nodemailer.SMTP = {
     user: process.env['SENDGRID_USERNAME'],
     pass: process.env['SENDGRID_PASSWORD']
 }
-sendEmail = (url, status) ->
+sendEmail = (subject, body) ->
   nodemailer.send_mail {
       sender: 'pinga@janmyr.com',
       to: 'anders@janmyr.com',
-      subject: "#{url} failed",
-      body: "#{url} failed with status #{status}"
+      subject: subject,
+      body: body
     },
     (err, result) -> 
       console.log(err) if err
@@ -72,6 +73,6 @@ for url in URLS
     setInterval pingUrl, 15 * 60 * 1000
     pingUrl()
     console.log(process.env);
-    sendEmail('url', 'status')
+    sendEmail('Ping restarted', '')
 
 
