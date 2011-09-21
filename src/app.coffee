@@ -25,7 +25,7 @@ app.configure ->
   app.use app.router
   app.use express.static(__dirname + '/public')
 
-
+console.log "Serving files from #{__dirname}/public"
 
 app.get '/', (request, response) ->
   response.send PINGS
