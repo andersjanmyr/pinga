@@ -23,15 +23,17 @@ app.configure ->
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use app.router
-  app.use express.static(__dirname + '/public')
+  app.use express.static(__dirname + '/../public')
 
-console.log "Serving files from #{__dirname}/public"
 
 app.get '/', (request, response) ->
   response.send PINGS
 
 port = process.env.PORT or process.env.VMC_APP_PORT or 4000 
+
+console.log(process.env);
 console.log "Starting on port #{port}"
+console.log "Serving files from #{__dirname}/../public"
 app.listen(port)
 
 timestamp = ->
@@ -74,7 +76,6 @@ for url in URLS
       pingHost url
     setInterval pingUrl, 15 * 60 * 1000
     pingUrl()
-    console.log(process.env);
 
 sendEmail('Pinga restarted', '')
 
