@@ -4,6 +4,9 @@ request = require 'request'
 express = require 'express'
 nodemailer = require 'nodemailer'
 
+process.on 'uncaughtException', (err) ->
+  console.log(err)
+
 app = express.createServer()
 
 URLS = [
@@ -38,11 +41,10 @@ timestamp = ->
   "#{date} #{time}"
 
 pingHost = (url) ->
-  console.log "Making request to #{url}"
-  request url, (error, response, body) ->
+  request url, (err, response, body) ->
+    console.log(err) if err
     PINGS.pop() while PINGS.length > 100
     PINGS.unshift [url, response.statusCode, timestamp()]
-    console.log PINGS
     if response.statusCode isnt 200
       sendEmail("#{url} failed", "#{url} failed with status #{response.statusCode}")
 
