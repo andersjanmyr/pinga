@@ -74,6 +74,6 @@ for url in URLS
     pingUrl()
     console.log(process.env);
 
-sendEmail('Ping restarted', '')
+sendEmail('Pinga restarted', '')
 
 
