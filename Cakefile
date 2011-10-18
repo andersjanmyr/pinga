@@ -3,8 +3,11 @@ fs = require 'fs'
 
 
 task 'build', 'continually build the src library with --watch', ->
-  coffee = spawn 'coffee', ['-cw', '-o', 'lib', 'src']
-  coffee.stdout.on 'data', (data) -> console.log data.toString().trim()
+  server = spawn 'coffee', ['-cw', '-o', 'lib', 'src/server']
+  server.stdout.on 'data', (data) -> console.log data.toString().trim()
+
+  client = spawn 'coffee', ['-cw', '-o', 'public/js/lib', 'src/client']
+  client.stdout.on 'data', (data) -> console.log data.toString().trim()
 
 task 'doc', 'rebuild the Docco documentation', ->
   exec([
