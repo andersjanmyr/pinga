@@ -3,11 +3,8 @@ require.paths.unshift('./node_modules')
 request = require 'request'
 express = require 'express'
 nodemailer = require 'nodemailer'
+jade = require 'jade'
 
-process.on 'uncaughtException', (err) ->
-  console.log(err)
-
-app = express.createServer()
 
 URLS = [
   'http://equilo.se',
@@ -18,16 +15,22 @@ URLS = [
 
 PINGS = []
 
+app = express.createServer()
 
-app.configure -> 
+app.configure ->
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use app.router
-  app.use express.static(__dirname + '/../public')
+  app.use express.static "#{__dirname}/../public"
+  app.set('views', "#{__dirname}/../views")
+  app.set('view engine', 'jade')
+  app.set('view options', { layout: false })
 
+app.get '/', (req, resp) ->
+  resp.render 'index'
 
-app.get '/', (request, response) ->
-  response.send PINGS
+app.get '/pings', (req, resp) ->
+  resp.send PINGS
 
 port = process.env.PORT or process.env.VMC_APP_PORT or 4000 
 
