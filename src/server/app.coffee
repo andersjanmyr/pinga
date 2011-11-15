@@ -11,6 +11,7 @@ URLS = [
   'http://halsansrum.herokuapp.com',
   'http://hjarups-yoga.herokuapp.com',
   'http://pinga.herokuapp.com',
+  'http://functional-javascript.heroku.com',
   'https://agenda-riksdagen.heroku.com/admins/sign_in']
 
 PINGS = []
