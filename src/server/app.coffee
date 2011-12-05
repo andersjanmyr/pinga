@@ -1,5 +1,3 @@
-require.paths.unshift('./node_modules')
-
 request = require 'request'
 express = require 'express'
 nodemailer = require 'nodemailer'
