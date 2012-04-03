@@ -11,6 +11,13 @@ html(lang="en")
     script(src='js/vendor/json2.js')
     script(src='/socket.io/socket.io.js')
     script(src='js/lib/main.js')
+
+    script(id='url-tmpl', type='text/tmpl')
+      li(id='<%=id%>')
+        :cdata
+          <%=url%>
+
+    script(id='url-tmpl', type='text/tmpl')
   body
     #container
 

@@ -10,12 +10,13 @@ sendgrid = new SendGrid(
 )
 
 URLS = [
-  'http://equilo.se',
-  'http://halsansrum.herokuapp.com',
-  'http://hjarups-yoga.herokuapp.com',
-  'http://pinga.herokuapp.com',
-  'http://functional-javascript.heroku.com',
-  'https://agenda-riksdagen.heroku.com/admins/sign_in']
+  {id: '1', url: 'http://equilo.se'},
+  {id: '2', url: 'http://halsansrum.herokuapp.com'},
+  {id: '3', url: 'http://hjarups-yoga.herokuapp.com'},
+  {id: '4', url: 'http://pinga.herokuapp.com'},
+  {id: '5', url: 'http://functional-javascript.heroku.com'},
+  {id: '3', url: 'https://agenda-riksdagen.heroku.com/admins/sign_in'}
+]
 
 PINGS = []
 
@@ -68,10 +69,10 @@ sendEmail = (subject, body) ->
       console.log(errors) unless success
 
 
-for url in URLS
-  do (url) ->
+for item in URLS
+  do (item) ->
     pingUrl = ->
-      pingHost url
+      pingHost item.url
     setInterval pingUrl, 15 * 60 * 1000
     pingUrl()
 
