@@ -16,7 +16,7 @@
     "mongodb":"",
     "request":"",
     "jade":"",
-    "nodemailer":""
+    "sendgrid":""
   },
   "scripts": {
     "start": "node lib/app.js"

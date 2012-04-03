@@ -2,7 +2,12 @@ request = require 'request'
 express = require 'express'
 nodemailer = require 'nodemailer'
 jade = require 'jade'
+SendGrid = require('sendgrid').SendGrid
 
+sendgrid = new SendGrid(
+  process.env.SENDGRID_USERNAME,
+  process.env.SENDGRID_PASSWORD
+)
 
 URLS = [
   'http://equilo.se',
@@ -31,7 +36,7 @@ app.get '/', (req, resp) ->
 app.get '/pings', (req, resp) ->
   resp.send PINGS
 
-port = process.env.PORT or process.env.VMC_APP_PORT or 4000 
+port = process.env.PORT or process.env.VMC_APP_PORT or 4000
 
 console.log(process.env);
 console.log "Starting on port #{port}"
@@ -52,29 +57,20 @@ pingHost = (url) ->
     if response.statusCode isnt 200
       sendEmail("#{url} failed", "#{url} failed with status #{response.statusCode}")
 
-nodemailer.SMTP = {
-    host: 'smtp.sendgrid.net',  
-    port: 25,
-    ssl: false, 
-    use_authentication: true,
-    domain: process.env['SENDGRID_DOMAIN'],
-    user: process.env['SENDGRID_USERNAME'],
-    pass: process.env['SENDGRID_PASSWORD']
-}
 sendEmail = (subject, body) ->
-  nodemailer.send_mail {
-      sender: 'pinga@janmyr.com',
+  sendgrid.send {
+      from: 'pinga@janmyr.com',
       to: 'anders@janmyr.com',
       subject: subject,
-      body: body
+      text: body
     },
-    (err, result) -> 
-      console.log(err) if err
+    (success, errors) ->
+      console.log(errors) unless success
 
 
 for url in URLS
   do (url) ->
-    pingUrl = -> 
+    pingUrl = ->
       pingHost url
     setInterval pingUrl, 15 * 60 * 1000
     pingUrl()
