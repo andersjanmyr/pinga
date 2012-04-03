@@ -1,6 +1,5 @@
 request = require 'request'
 express = require 'express'
-jade = require 'jade'
 socketio = require 'socket.io'
 SendGrid = require('sendgrid').SendGrid
 
@@ -28,11 +27,7 @@ app.configure ->
   app.use app.router
   app.use express.static "#{__dirname}/../public"
   app.set('views', "#{__dirname}/../views")
-  app.set('view engine', 'jade')
   app.set('view options', { layout: false })
-
-app.get '/', (req, resp) ->
-  resp.render 'index'
 
 app.get '/pings', (req, resp) ->
   resp.send PINGS
