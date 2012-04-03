@@ -74,6 +74,6 @@ for url in URLS
     setInterval pingUrl, 15 * 60 * 1000
     pingUrl()
 
-sendEmail('Pinga restarted', '')
+sendEmail('Pinga restarted', timestamp())
 
 
