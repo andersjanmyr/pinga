@@ -1,6 +1,7 @@
 request = require 'request'
 express = require 'express'
 jade = require 'jade'
+socketio = require 'socket.io'
 SendGrid = require('sendgrid').SendGrid
 
 sendgrid = new SendGrid(
@@ -75,5 +76,15 @@ for url in URLS
     pingUrl()
 
 sendEmail('Pinga restarted', timestamp())
+
+since = timestamp()
+
+io = socketio.listen(app)
+
+io.sockets.on 'connection', (socket) ->
+  socket.emit 'status', {runningSince: since }
+  socket.on 'urls:read', (data, callback) ->
+    console.log data
+    callback null, URLS
 
 

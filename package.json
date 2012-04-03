@@ -16,7 +16,8 @@
     "mongodb":"",
     "request":"",
     "jade":"",
-    "sendgrid":""
+    "sendgrid":"",
+    "socket.io":""
   },
   "scripts": {
     "start": "node lib/app.js"
