@@ -11,4 +11,5 @@ Currently everything in it is hard-coded, but in the future...
 * Runtime adding and modification of URLs.
 * Admin scheduling
 * Log to database
+* Configuration options
 
