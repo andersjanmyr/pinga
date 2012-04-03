@@ -3,7 +3,7 @@
 
   socket = io.connect("http://localhost");
 
-  socket.on('news', function(data) {
+  socket.on('status', function(data) {
     return console.log(data);
   });
 

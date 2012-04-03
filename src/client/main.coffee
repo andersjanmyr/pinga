@@ -1,4 +1,4 @@
   socket = io.connect "http://localhost"
-  socket.on 'news', (data) -> 
+  socket.on 'status', (data) ->
     console.log(data)
 
