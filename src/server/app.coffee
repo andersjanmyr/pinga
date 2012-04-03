@@ -1,6 +1,5 @@
 request = require 'request'
 express = require 'express'
-nodemailer = require 'nodemailer'
 jade = require 'jade'
 SendGrid = require('sendgrid').SendGrid
 
