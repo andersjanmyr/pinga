@@ -1,11 +1,12 @@
 (function() {
-  var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+  var __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
   $(function() {
     var Url, UrlView, Urls, UrlsView, socket, urls, urlsView;
-    Url = (function() {
+    Url = (function(_super) {
 
-      __extends(Url, Backbone.Model);
+      __extends(Url, _super);
 
       function Url() {
         Url.__super__.constructor.apply(this, arguments);
@@ -17,10 +18,10 @@
 
       return Url;
 
-    })();
-    Urls = (function() {
+    })(Backbone.Model);
+    Urls = (function(_super) {
 
-      __extends(Urls, Backbone.Collection);
+      __extends(Urls, _super);
 
       function Urls() {
         Urls.__super__.constructor.apply(this, arguments);
@@ -30,10 +31,10 @@
 
       return Urls;
 
-    })();
-    UrlView = (function() {
+    })(Backbone.Collection);
+    UrlView = (function(_super) {
 
-      __extends(UrlView, Backbone.View);
+      __extends(UrlView, _super);
 
       function UrlView() {
         UrlView.__super__.constructor.apply(this, arguments);
@@ -50,10 +51,10 @@
 
       return UrlView;
 
-    })();
-    UrlsView = (function() {
+    })(Backbone.View);
+    UrlsView = (function(_super) {
 
-      __extends(UrlsView, Backbone.View);
+      __extends(UrlsView, _super);
 
       function UrlsView() {
         UrlsView.__super__.constructor.apply(this, arguments);
@@ -81,7 +82,7 @@
 
       return UrlsView;
 
-    })();
+    })(Backbone.View);
     socket = io.connect();
     Backbone.socket = socket;
     socket.on('status', function(data) {
