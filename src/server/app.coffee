@@ -85,7 +85,6 @@ io.sockets.on 'connection', (socket) ->
   socket.emit 'status', {runningSince: since }
   new SocketResource(socket, 'urls', {
     read: (data, callback) ->
-      console.log data
       callback null, URLS
   })
 
