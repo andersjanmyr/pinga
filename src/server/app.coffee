@@ -2,6 +2,7 @@ request = require 'request'
 express = require 'express'
 socketio = require 'socket.io'
 SendGrid = require('sendgrid').SendGrid
+SocketResource = require './socket-resource'
 
 sendgrid = new SendGrid(
   process.env.SENDGRID_USERNAME,
@@ -82,8 +83,9 @@ io.configure ->
 
 io.sockets.on 'connection', (socket) ->
   socket.emit 'status', {runningSince: since }
-  socket.on 'urls:read', (data, callback) ->
-    console.log data
-    callback null, URLS
-
+  new SocketResource(socket, 'urls', {
+    read: (data, callback) ->
+      console.log data
+      callback null, URLS
+  })
 
