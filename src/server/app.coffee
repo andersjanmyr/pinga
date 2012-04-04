@@ -76,6 +76,9 @@ sendEmail('Pinga restarted', timestamp())
 since = timestamp()
 
 io = socketio.listen(app)
+io.configure ->
+  io.set "transports", ["xhr-polling"]
+  io.set "polling duration", 10
 
 io.sockets.on 'connection', (socket) ->
   socket.emit 'status', {runningSince: since }
