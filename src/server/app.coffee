@@ -1,6 +1,6 @@
 request = require 'request'
 express = require 'express'
-jade = require 'jade'
+socketio = require 'socket.io'
 SendGrid = require('sendgrid').SendGrid
 
 sendgrid = new SendGrid(
@@ -9,12 +9,13 @@ sendgrid = new SendGrid(
 )
 
 URLS = [
-  'http://equilo.se',
-  'http://halsansrum.herokuapp.com',
-  'http://hjarups-yoga.herokuapp.com',
-  'http://pinga.herokuapp.com',
-  'http://functional-javascript.heroku.com',
-  'https://agenda-riksdagen.heroku.com/admins/sign_in']
+  {id: '1', url: 'http://equilo.se'},
+  {id: '2', url: 'http://halsansrum.herokuapp.com'},
+  {id: '3', url: 'http://hjarups-yoga.herokuapp.com'},
+  {id: '4', url: 'http://pinga.herokuapp.com'},
+  {id: '5', url: 'http://functional-javascript.heroku.com'},
+  {id: '3', url: 'https://agenda-riksdagen.heroku.com/admins/sign_in'}
+]
 
 PINGS = []
 
@@ -26,11 +27,7 @@ app.configure ->
   app.use app.router
   app.use express.static "#{__dirname}/../public"
   app.set('views', "#{__dirname}/../views")
-  app.set('view engine', 'jade')
   app.set('view options', { layout: false })
-
-app.get '/', (req, resp) ->
-  resp.render 'index'
 
 app.get '/pings', (req, resp) ->
   resp.send PINGS
@@ -67,13 +64,23 @@ sendEmail = (subject, body) ->
       console.log(errors) unless success
 
 
-for url in URLS
-  do (url) ->
+for item in URLS
+  do (item) ->
     pingUrl = ->
-      pingHost url
+      pingHost item.url
     setInterval pingUrl, 15 * 60 * 1000
     pingUrl()
 
 sendEmail('Pinga restarted', timestamp())
+
+since = timestamp()
+
+io = socketio.listen(app)
+
+io.sockets.on 'connection', (socket) ->
+  socket.emit 'status', {runningSince: since }
+  socket.on 'urls:read', (data, callback) ->
+    console.log data
+    callback null, URLS
 
 
