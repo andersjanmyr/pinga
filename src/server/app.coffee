@@ -1,3 +1,4 @@
+http = require 'http'
 request = require 'request'
 express = require 'express'
 socketio = require 'socket.io'
@@ -20,7 +21,9 @@ URLS = [
 
 PINGS = []
 
-app = express.createServer()
+app = express()
+server = http.createServer(app)
+server.listen(port)
 
 app.configure ->
   app.use express.bodyParser()
@@ -38,7 +41,6 @@ port = process.env.PORT or process.env.VMC_APP_PORT or 4000
 console.log(process.env);
 console.log "Starting on port #{port}"
 console.log "Serving files from #{__dirname}/../public"
-app.listen(port)
 
 timestamp = ->
   d = new Date
@@ -76,7 +78,7 @@ sendEmail('Pinga restarted', timestamp())
 
 since = timestamp()
 
-io = socketio.listen(app)
+io = socketio.listen(server)
 io.configure ->
   io.set "transports", ["xhr-polling"]
   io.set "polling duration", 10
