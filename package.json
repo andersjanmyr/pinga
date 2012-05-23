@@ -1,6 +1,6 @@
 {
   "name": "pinga",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "engines": {
     "node": ">= 0.4.1 < 0.7.0"
   },
@@ -14,7 +14,7 @@
     "url": "https://github.com/andersjanmyr/pinga.git"
   },
   "dependencies": {
-    "express": "",
+    "express": "3.0",
     "mongodb": "",
     "request": "",
     "sendgrid": "",
