@@ -17,7 +17,7 @@ URLS = [
   {id: '4', url: 'http://pinga.herokuapp.com'},
   {id: '5', url: 'http://functional-javascript.heroku.com'},
   {id: '6', url: 'https://agenda-riksdagen.heroku.com/admins/sign_in'},
-  {id: '7', url: 'http://lexiconsyd.se:3007/'}
+  {id: '7', url: 'http://lexiconsyd.se:3007/login'}
 ]
 
 PINGS = []
