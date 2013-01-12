@@ -12,8 +12,8 @@ sendgrid = new SendGrid(
 
 URLS = [
   {id: '1', url: 'http://equilo.se'},
-  {id: '2', url: 'http://halsansrum.herokuapp.com'},
-  {id: '3', url: 'http://hjarups-yoga.herokuapp.com'},
+  {id: '2', url: 'http://anders-errbit.herokuapp.com'},
+  {id: '3', url: 'http://questbox.herokuapp.com'},
   {id: '4', url: 'http://pinga.herokuapp.com'},
   {id: '5', url: 'http://tapirs.herokuapp.com'},
   {id: '6', url: 'http://functional-javascript.heroku.com'}
