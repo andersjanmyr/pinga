@@ -16,7 +16,8 @@ URLS = [
   {id: '3', url: 'http://questbox.herokuapp.com'},
   {id: '4', url: 'http://pinga.herokuapp.com'},
   {id: '5', url: 'http://tapirs.herokuapp.com'},
-  {id: '6', url: 'http://functional-javascript.heroku.com'}
+  {id: '6', url: 'http://functional-javascript.heroku.com'},
+  {id: '7', url: 'http://tapircms.herokuapp.com'}
 ]
 
 PINGS = []
