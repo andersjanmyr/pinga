@@ -2,10 +2,10 @@ http = require 'http'
 request = require 'request'
 express = require 'express'
 socketio = require 'socket.io'
-SendGrid = require('sendgrid').SendGrid
+SendGrid = require('sendgrid')
 SocketResource = require './socket-resource'
 
-sendgrid = new SendGrid(
+sendgrid = SendGrid(
   process.env.SENDGRID_USERNAME,
   process.env.SENDGRID_PASSWORD
 )
