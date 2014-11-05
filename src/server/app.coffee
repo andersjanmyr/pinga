@@ -11,7 +11,7 @@ sendgrid = SendGrid(
 )
 
 URLS = [
-  {id: '1', url: 'http://equilo.se'},
+  {id: '1', url: 'http://www.equilo.se'},
   {id: '2', url: 'http://anders-errbit.herokuapp.com'},
   {id: '3', url: 'http://test-env.herokuapp.com/env'},
   {id: '4', url: 'http://pinga.herokuapp.com'},
@@ -53,7 +53,7 @@ timestamp = ->
 
 pingHost = (url) ->
   request url, (err, response, body) ->
-    console.log(err) if err
+    return console.log(err) if err
     PINGS.pop() while PINGS.length > 100
     PINGS.unshift [url, response.statusCode, timestamp()]
     if response.statusCode isnt 200
