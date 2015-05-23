@@ -1,6 +1,8 @@
 http = require 'http'
 request = require 'request'
 express = require 'express'
+bodyParser = require 'body-parser'
+methodOverride = require 'method-override'
 socketio = require 'socket.io'
 SendGrid = require('sendgrid')
 SocketResource = require './socket-resource'
@@ -30,13 +32,11 @@ app = express()
 server = http.createServer(app)
 server.listen(port)
 
-app.configure ->
-  app.use express.bodyParser()
-  app.use express.methodOverride()
-  app.use app.router
-  app.use express.static "#{__dirname}/../public"
-  app.set('views', "#{__dirname}/../views")
-  app.set('view options', { layout: false })
+app.use bodyParser.json()
+app.use methodOverride()
+app.use express.static "#{__dirname}/../public"
+app.set('views', "#{__dirname}/../views")
+app.set('view options', { layout: false })
 
 app.get '/pings', (req, resp) ->
   resp.send PINGS
@@ -83,9 +83,6 @@ sendEmail('Pinga restarted', timestamp())
 since = timestamp()
 
 io = socketio.listen(server)
-io.configure ->
-  io.set "transports", ['xhr-polling']
-  io.set "polling duration", 10
 
 io.sockets.on 'connection', (socket) ->
   socket.emit 'status', {runningSince: since }
