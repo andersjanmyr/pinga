@@ -6,6 +6,12 @@ respond with OK(200).
 
 Currently everything in it is hard-coded, but in the future...
 
+## Installation
+
+```
+npm install -g less coffee
+```
+
 ### Todo
 
 * Runtime adding and modification of URLs.
