@@ -14,13 +14,8 @@ sendgrid = SendGrid(
 
 URLS = [
   {id: '1', url: 'http://www.equilo.se'},
-  {id: '2', url: 'http://anders-errbit.herokuapp.com'},
-  {id: '3', url: 'http://test-env.herokuapp.com/env'},
   {id: '4', url: 'http://pinga.janmyr.com'},
   {id: '5', url: 'http://tapirs.janmyr.com'},
-  {id: '6', url: 'http://functional-javascript.herokuapp.com'},
-  {id: '7', url: 'http://death-clock.herokuapp.com'},
-  {id: '8', url: 'http://sparklingandwine.herokuapp.com'},
   {id: '9', url: 'http://vocabulary.janmyr.com'}
 ]
 
